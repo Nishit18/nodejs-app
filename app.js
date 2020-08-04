@@ -4,10 +4,14 @@ const app = express();
 app.listen(3000);
 
 // Add user routes
-const user = require('./routes/user.route');
-const userDetail = require('./routes/user-detail.route');
-app.use('/user', user);
-app.use('/user-detail', userDetail);
+// const user = require('./routes/user.route');
+// const userDetail = require('./routes/user-detail.route');
+// app.use('/user', user);
+// app.use('/user-detail', userDetail);
+
+// Add all routes from app route file
+const appRoute = require('./routes/app.route');
+app.use('/api',appRoute);
 
 // const http = require('http');
 
