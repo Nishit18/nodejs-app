@@ -11,7 +11,7 @@ app.listen(3000);
 
 // Add all routes from app route file
 const appRoute = require('./routes/app.route');
-app.use('/api',appRoute);
+app.use('/api', appRoute);
 
 // const http = require('http');
 
