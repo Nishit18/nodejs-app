@@ -1,7 +1,11 @@
 const express = require('express');
 const app = express();
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
+
+// For convert stream request data to json object 
+// If you remove this then you can't get data in request body
+app.use(express.json());
 
 // Add all routes from app route file
 const appRoute = require('./routes/app.route');
