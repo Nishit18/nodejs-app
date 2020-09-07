@@ -47,3 +47,6 @@ Thumbs.db
 
 # iisnode folder
 /iisnode
+
+# remove configurations folder
+/configurations
