@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../configurations/environment.configuration');
 const mssqlAccess = require('../services/mssql-access');
 const jsonDatabase = require('../services/json-database.service');
+const sp = require('../models/stored-procedure.model');
 
 const topSecretKeyForJwt = config.jwtTokenKey;
 const sqlConfiguration = config.sqlConfiguration;
@@ -23,7 +24,7 @@ exports.register = (req, res, next) => {
         { key: 'Action', value: 'insert' },
     ];
 
-    mssqlAccess.execute(sqlConfiguration, 'Security_User_Detail_CRUD', sqlParameters, response => {
+    mssqlAccess.execute(sqlConfiguration, sp.Security_User_Detail_CRUD, sqlParameters, response => {
         if (response != null) {
             jsonDatabase.convert(response, (resultJson) => {
                 res.status(200).json(resultJson);
@@ -41,7 +42,7 @@ exports.login = (req, res, next) => {
         { key: 'Action', value: 'getbyid' }
     ];
 
-    mssqlAccess.execute(sqlConfiguration, 'Security_User_Detail_CRUD', sqlParameters, response => {
+    mssqlAccess.execute(sqlConfiguration, sp.Security_User_Detail_CRUD, sqlParameters, response => {
         if (response != null) {
             const passwordSalt = response[0][0].PasswordSalt;
             const password = crypto.createHmac('sha512', passwordSalt);
