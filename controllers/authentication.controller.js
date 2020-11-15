@@ -43,7 +43,7 @@ exports.login = (req, res, next) => {
     ];
 
     mssqlAccess.execute(sqlConfiguration, sp.Security_User_Detail_CRUD, sqlParameters, response => {
-        if (response != null) {
+        if (response != null && response[0].length > 0) {
             const passwordSalt = response[0][0].PasswordSalt;
             const password = crypto.createHmac('sha512', passwordSalt);
             password.update(req.body.password);
